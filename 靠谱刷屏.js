@@ -1,9 +1,11 @@
-/*  无限刷屏
+/*  靠谱刷屏
+    更新日志
     1.0:可以寻人定时喊话，功能强大(迫真)
     1.1:可自定义刷屏文本
     1.2:新增UI界面、空输入判断
     1.3:新增时间的正则判断，只允许输入纯数字
     1.4:新增返回功能，目前可从聊天（含文件传输界面）返回至搜索框
+    1.4.1:返回函数优化，支持绝大部分场景返回
 */
 // ============必要声明============
 "ui";
@@ -22,15 +24,21 @@ importClass(com.stardust.autojs.core.accessibility.AccessibilityBridge.WindowFil
     }));
 // ============功能函数============
 function back_Upper() {
-    if(text("发送").findOne(100) !== null || text("手机文件").findOne(100) !== null || text("我的电脑").findOne(100) !== null || text("手机静音").findOne(1200) !== null) {
+//     1.4版本返回函数
+//     if(text("发送").findOne(100) !== null || text("手机文件").findOne(100) !== null || text("我的电脑").findOne(100) !== null || text("手机静音").findOne(1200) !== null) {
+//         back();
+//         //返回过快，上一级界面还没消失完全第二次if判断可能就会开始，必须sleep
+//         sleep(1000);
+//         if (text("发送").findOne(100) !== null || text("手机文件").findOne(100) !== null || text("我的电脑").findOne(100) !== null || text("手机静音").findOne(1200) !== null) {
+//             back();
+//         } else {
+//         }
+//     }else{
+//     }
+// }
+    while (id("dz1").findOne(100) !== null ||  id("lpm").findOne(100) !== null || id("ivTitleBtnLeft").findOne(100) !== null) {
         back();
-        //返回过快，上一级界面还没消失完全第二次if判断可能就会开始，必须sleep
         sleep(1000);
-        if (text("发送").findOne(100) !== null || text("手机文件").findOne(100) !== null || text("我的电脑").findOne(100) !== null || text("手机静音").findOne(1200) !== null) {
-            back();
-        } else {
-        }
-    }else{
     }
 }
 function fill() {
@@ -47,8 +55,7 @@ function fill() {
     }, setTime * 1000)
     var over = setInterval(function () {
       clearInterval(over)
-      toast('执行完成,返回主屏幕')
-      home();
+      toast('执行完成');
       exit();
     }, setTime * 1000)
   }
