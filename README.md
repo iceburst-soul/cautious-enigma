@@ -1,4 +1,4 @@
-# cautious-enigma
+# shuaping
 **基于autojs编写，安卓机运行**
 
 **更新记录**
